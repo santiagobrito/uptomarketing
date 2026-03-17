@@ -124,16 +124,19 @@ export default function SobreNosotros() {
           </div>
         </section>
 
-        {/* El equipo */}
+        {/* Quién está detrás */}
         <section className="bg-bg-primary py-20">
           <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-12 text-center">
-              El equipo
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4 text-center">
+              Quién está detrás
             </h2>
-            <div className="flex flex-col md:flex-row items-center gap-10">
+            <p className="text-text-secondary text-lg text-center max-w-2xl mx-auto mb-12">
+              Up To Marketing nace de la experiencia directa trabajando con despachos profesionales durante más de 15 años.
+            </p>
+            <div className="flex flex-col md:flex-row items-center gap-10 bg-white border border-border rounded-2xl p-8">
               {/* Foto placeholder */}
               <div className="flex-shrink-0">
-                <div className="h-48 w-48 rounded-2xl bg-blue-800 flex items-center justify-center">
+                <div className="h-48 w-48 rounded-2xl bg-gradient-to-br from-blue-800 to-blue-600 flex items-center justify-center">
                   <span className="text-5xl font-bold text-white">SB</span>
                 </div>
               </div>
@@ -156,6 +159,14 @@ export default function SobreNosotros() {
                     estrategia y construye las herramientas para ejecutarla.
                   </p>
                 </div>
+                <a
+                  href="https://www.linkedin.com/in/santiagobrito/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-600 text-sm font-medium mt-4 hover:text-blue-800 transition-colors"
+                >
+                  Ver perfil en LinkedIn →
+                </a>
               </div>
             </div>
           </div>
