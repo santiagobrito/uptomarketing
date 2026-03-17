@@ -34,9 +34,22 @@ export function Hero() {
             Ver cómo trabajamos
           </Button>
         </div>
-        <p className="text-white/60 text-sm">
+        <p className="text-white/60 text-sm mb-10">
           Sin compromiso. En 48h tienes tu diagnóstico con recomendaciones accionables.
         </p>
+
+        {/* Sector tags */}
+        <div className="flex flex-wrap justify-center gap-2">
+          <span className="text-xs text-white/60 mr-2 self-center">SECTORES Y ESPECIALIZACIÓN</span>
+          {["Asesorías fiscales", "Despachos contables", "Bufetes de abogados", "Consultoras", "Empresas de servicios B2B"].map((tag) => (
+            <span
+              key={tag}
+              className="bg-white/10 text-white/70 text-xs rounded-full px-3 py-1 border border-white/10"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

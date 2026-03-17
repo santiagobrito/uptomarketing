@@ -7,6 +7,7 @@ const services: {
   icon: LucideIcon;
   metric?: string;
   href: string;
+  tags: string[];
 }[] = [
   {
     title: "Estrategia de marketing digital",
@@ -14,6 +15,7 @@ const services: {
       "Auditoría, plan de acción y objetivos medibles. El punto de partida antes de tocar nada.",
     icon: Compass,
     href: "/servicios/estrategia-marketing-digital",
+    tags: ["Auditoría digital", "Plan de canales", "KPIs de negocio"],
   },
   {
     title: "SEO y posicionamiento web",
@@ -22,6 +24,7 @@ const services: {
     icon: Search,
     metric: "+180% tráfico orgánico medio",
     href: "/servicios/seo-posicionamiento-web",
+    tags: ["SEO técnico", "Contenido especializado", "SEO local"],
   },
   {
     title: "Publicidad digital",
@@ -30,6 +33,7 @@ const services: {
     icon: Megaphone,
     metric: "-45% coste por lead medio",
     href: "/servicios/publicidad-digital",
+    tags: ["Google Ads", "Meta Ads", "Programática", "Remarketing"],
   },
   {
     title: "CRM e integraciones",
@@ -38,6 +42,7 @@ const services: {
     icon: Database,
     metric: "0 leads perdidos",
     href: "/servicios/crm-integraciones",
+    tags: ["HubSpot", "Pipedrive", "APIs", "Integraciones"],
   },
   {
     title: "Automatizaciones de marketing",
@@ -46,6 +51,7 @@ const services: {
     icon: Zap,
     metric: "+12h/semana ahorradas",
     href: "/servicios/automatizaciones-marketing",
+    tags: ["Email marketing", "Lead scoring", "Workflows", "n8n"],
   },
   {
     title: "Desarrollo web orientado a conversión",
@@ -54,6 +60,7 @@ const services: {
     icon: Monitor,
     metric: "3x más conversiones",
     href: "/servicios/desarrollo-web-conversion",
+    tags: ["Next.js", "Rendimiento", "Conversión", "Analytics"],
   },
 ];
 
@@ -72,9 +79,9 @@ export function Services() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="bg-white border border-border rounded-xl p-6 hover:shadow-md transition"
+              className="bg-white border border-border rounded-xl p-6 hover:shadow-md transition flex flex-col"
             >
-              <div className="bg-blue-50 p-3 rounded-full mb-4 inline-flex">
+              <div className="bg-blue-50 p-3 rounded-full mb-4 inline-flex self-start">
                 <service.icon className="text-blue-600" size={24} />
               </div>
               <h3 className="font-semibold text-text-primary mb-3">
@@ -86,6 +93,16 @@ export function Services() {
                   {service.metric}
                 </p>
               )}
+              <div className="flex flex-wrap gap-1.5 mb-4 mt-auto">
+                {service.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-blue-50 text-blue-600 text-xs px-2 py-0.5 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
               <a href={service.href} className="text-blue-600 font-medium text-sm">
                 Saber más &rarr;
               </a>
