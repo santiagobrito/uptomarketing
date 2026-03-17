@@ -85,7 +85,12 @@ export function TimeSlotPicker({
         return res.json();
       })
       .then((data) => {
-        setSlotData({ slots: data.slots || [], loading: false, error: null });
+        // API returns { slots: [{ time: "09:00", available: true }, ...] } or { slots: ["09:00", ...] }
+        const rawSlots = data.slots || [];
+        const normalizedSlots = rawSlots.map((s: string | { time: string }) =>
+          typeof s === "string" ? s : s.time
+        );
+        setSlotData({ slots: normalizedSlots, loading: false, error: null });
       })
       .catch((err) => {
         if (err.name === "AbortError") return;

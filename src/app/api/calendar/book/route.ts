@@ -7,7 +7,17 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     // Validación básica
-    const { date, time, firstName, lastName, email, company, activity, employees, challenge, notes } = body;
+    // Support both naming conventions (modal sends Spanish field names)
+    const date = body.date;
+    const time = body.time;
+    const firstName = body.firstName || body.nombre;
+    const lastName = body.lastName || body.apellido;
+    const email = body.email;
+    const company = body.company || body.empresa;
+    const activity = body.activity || body.actividad;
+    const employees = body.employees || body.empleados;
+    const challenge = body.challenge || body.retoMarketing;
+    const notes = body.notes || body.notasAdicionales;
 
     if (!date || !time || !firstName || !lastName || !email || !company || !challenge) {
       return NextResponse.json(
@@ -26,8 +36,8 @@ export async function POST(request: Request) {
 
     const name = `${firstName} ${lastName}`;
     const topic = [
-      `Actividad: ${activity}`,
-      `Empleados: ${employees}`,
+      activity ? `Actividad: ${activity}` : "",
+      employees ? `Empleados: ${employees}` : "",
       `Reto principal: ${challenge}`,
       notes ? `Notas: ${notes}` : "",
     ].filter(Boolean).join("\n");
