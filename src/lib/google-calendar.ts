@@ -39,8 +39,12 @@ export async function getAvailableSlots(date: string) {
   const startOfDay = new Date(`${date}T09:00:00+02:00`); // Hora España
   const endOfDay = new Date(`${date}T18:00:00+02:00`);
 
+  console.log("[Calendar] GOOGLE_CLIENT_ID set:", !!process.env.GOOGLE_CLIENT_ID);
+  console.log("[Calendar] GOOGLE_REFRESH_TOKEN set:", !!process.env.GOOGLE_REFRESH_TOKEN);
+
   // Si las credenciales no están configuradas, devolver slots mock
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_REFRESH_TOKEN) {
+    console.log("[Calendar] Using MOCK slots (no credentials)");
     const mockSlots = generateTimeSlots(startOfDay, endOfDay, 30);
     // Simular algunos slots ocupados (aleatoriamente quitar algunos)
     return mockSlots
@@ -80,11 +84,14 @@ export async function createBooking(params: {
 }) {
   // Si no hay credenciales, devolver datos mock
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_REFRESH_TOKEN) {
+    console.log("[Calendar] Using MOCK booking (no credentials)");
     return {
       eventId: `mock-${Date.now()}`,
       meetLink: "https://meet.google.com/mock-meeting",
     };
   }
+
+  console.log("[Calendar] Creating REAL booking for", params.name, params.date, params.time);
 
   const start = new Date(`${params.date}T${params.time}:00+02:00`);
   const end = new Date(start.getTime() + 30 * 60 * 1000);
