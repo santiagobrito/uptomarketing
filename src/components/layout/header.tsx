@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 const navLinks = [
   { label: "Servicios", href: "/servicios" },
@@ -57,9 +57,9 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:block">
-          <Button href="/contacto" size="sm">
+          <BookingTrigger className="inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-copper-500 text-white hover:bg-copper-600 focus-visible:ring-copper-500 px-4 py-2 text-sm">
             Agendar reunion
-          </Button>
+          </BookingTrigger>
         </div>
 
         {/* Mobile hamburger */}
@@ -109,13 +109,9 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-2">
-              <Button
-                href="/contacto"
-                size="md"
-                className="w-full text-center"
-              >
+              <BookingTrigger className="w-full inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-copper-500 text-white hover:bg-copper-600 focus-visible:ring-copper-500 px-6 py-2.5 text-base">
                 Agendar reunion
-              </Button>
+              </BookingTrigger>
             </div>
           </div>
         </div>
