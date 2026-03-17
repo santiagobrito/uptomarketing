@@ -39,7 +39,7 @@ export default function AutomatizacionesMarketing() {
               multiplicar el equipo.
             </p>
             <Button href="/contacto" variant="primary" size="lg">
-              Agendar reunion
+              Agendar reunión
             </Button>
           </div>
         </section>
@@ -59,7 +59,7 @@ export default function AutomatizacionesMarketing() {
                 {
                   icon: Users,
                   title: "Seguimiento manual de leads",
-                  text: "Alguien tiene que acordarse de enviar ese email de seguimiento tres dias despues de la reunion. A veces se acuerda. A veces no.",
+                  text: "Alguien tiene que acordarse de enviar ese email de seguimiento tres dias despues de la reunión. A veces se acuerda. A veces no.",
                 },
                 {
                   icon: Mail,
@@ -294,7 +294,7 @@ export default function AutomatizacionesMarketing() {
                 },
                 {
                   title: "Ciclo de venta mas corto",
-                  text: "Los leads llegan mas cualificados y mejor informados al momento de la reunion comercial, porque han recibido contenido relevante de forma automatica.",
+                  text: "Los leads llegan mas cualificados y mejor informados al momento de la reunión comercial, porque han recibido contenido relevante de forma automatica.",
                 },
                 {
                   title: "Proceso replicable y predecible",
@@ -368,12 +368,12 @@ export default function AutomatizacionesMarketing() {
             </h2>
             <p className="text-lg text-blue-100 mb-10">
               Cuentanos que procesos de marketing y ventas te gustaria
-              automatizar. Te propondremos una solucion concreta en una reunion
+              automatizar. Te propondremos una solucion concreta en una reunión
               de 30 minutos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/contacto" variant="primary" size="lg">
-                Agendar reunion
+                Agendar reunión
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button href="/contacto" variant="outline" size="lg">

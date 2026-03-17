@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { InlineBooking } from "./inline-booking";
 
 export const metadata: Metadata = {
-  title: "Agendar Reunion",
+  title: "Agendar Reunión",
   description:
     "Reserva 30 minutos con nuestro equipo para analizar tu situacion de marketing y encontrar oportunidades de crecimiento para tu despacho.",
 };
@@ -14,7 +14,7 @@ export default function AgendarReunionPage() {
       <section className="pt-24 pb-12 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <span className="inline-block bg-white/10 text-white/80 text-sm rounded-full px-4 py-1 mb-6">
-            Reunion gratuita de 30 minutos
+            Reunión gratuita de 30 minutos
           </span>
           <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
             30 minutos para analizar tu situacion

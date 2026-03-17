@@ -78,7 +78,7 @@ export function InlineBooking() {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Error al agendar la reunion");
+        throw new Error(data.error || "Error al agendar la reunión");
       }
       setStep(4);
     } catch (err: unknown) {
@@ -187,7 +187,7 @@ export function InlineBooking() {
         {step === 3 && (
           <div className="space-y-4">
             <p className="text-sm text-text-secondary mb-2">
-              Ayudanos a preparar la reunion para aprovecharla al maximo.
+              Ayúdanos a preparar la reunión para aprovecharla al máximo.
             </p>
             <div>
               <label className="block text-sm font-medium text-text-primary mb-1.5">Actividad principal de tu despacho</label>
@@ -225,7 +225,7 @@ export function InlineBooking() {
               <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-error">{submitError}</div>
             )}
             <button type="button" disabled={!isStep3Valid || isSubmitting} onClick={handleSubmit} className={`${btnClass} mt-2`}>
-              {isSubmitting ? (<><Loader2 className="h-4 w-4 animate-spin" /> Agendando...</>) : "Agendar reunion"}
+              {isSubmitting ? (<><Loader2 className="h-4 w-4 animate-spin" /> Agendando...</>) : "Agendar reunión"}
             </button>
           </div>
         )}
@@ -236,7 +236,7 @@ export function InlineBooking() {
               <Check className="h-8 w-8 text-success" strokeWidth={2.5} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-text-primary mb-2">Tu reunion ha sido agendada</h3>
+              <h3 className="text-xl font-bold text-text-primary mb-2">Tu reunión ha sido agendada</h3>
               <div className="inline-flex items-center gap-2 rounded-lg bg-bg-secondary px-4 py-2.5 font-mono text-sm text-text-primary">
                 <span>{selectedDate ? formatDisplayDate(selectedDate) : ""}</span>
                 <span className="text-text-secondary">|</span>
@@ -245,7 +245,7 @@ export function InlineBooking() {
             </div>
             <div className="space-y-2 text-sm text-text-secondary">
               <p>Te hemos enviado un email de confirmacion con el enlace de Google Meet.</p>
-              <p>Revisa tu bandeja de entrada para preparar la reunion.</p>
+              <p>Revisa tu bandeja de entrada para preparar la reunión.</p>
             </div>
             <a
               href="/"

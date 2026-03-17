@@ -40,7 +40,7 @@ export default function GestionProyectosMarketing() {
               resultados. Para que las cosas se hagan, bien y a tiempo.
             </p>
             <Button href="/contacto" variant="primary" size="lg">
-              Agendar reunion
+              Agendar reunión
             </Button>
           </div>
         </section>
@@ -396,7 +396,7 @@ export default function GestionProyectosMarketing() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button href="/contacto" variant="primary" size="lg">
-                Agendar reunion
+                Agendar reunión
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button href="/contacto" variant="outline" size="lg">

@@ -361,7 +361,7 @@ export default function EstrategiaMarketingDigitalPage() {
                 Agendar reunión
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button href="mailto:info@uptomarketing.com" variant="outline" size="lg">
+              <Button href="mailto:hola@uptomarketing.com" variant="outline" size="lg">
                 Contactar por email
               </Button>
             </div>

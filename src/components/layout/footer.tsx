@@ -95,6 +95,16 @@ export function Footer() {
                   hola@uptomarketing.com
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/santiagobrito/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-200 transition-colors duration-200 hover:text-white"
+                >
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </div>
         </div>

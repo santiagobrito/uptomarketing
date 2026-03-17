@@ -7,8 +7,6 @@ import {
   Database,
   Zap,
   Monitor,
-  BarChart3,
-  Mail,
   ArrowRight,
 } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
@@ -82,22 +80,6 @@ const services: {
     metric: "3x más conversiones",
     href: "/servicios/desarrollo-web-conversion",
     tags: ["Next.js", "Rendimiento", "Conversión", "Analytics"],
-  },
-  {
-    title: "Analítica y reporting",
-    description:
-      "Cuadros de mando con las métricas que importan: leads, coste de adquisición, retorno real. Sin vanity metrics.",
-    icon: BarChart3,
-    href: "/servicios/analitica-reporting",
-    tags: ["Google Analytics 4", "Dashboards", "Atribución"],
-  },
-  {
-    title: "Email marketing y nurturing",
-    description:
-      "Secuencias de contenido que nutren al lead desde la primera visita hasta la contratación. Sin spam, con estrategia.",
-    icon: Mail,
-    href: "/servicios/email-marketing",
-    tags: ["Secuencias", "Segmentación", "Contenido de valor"],
   },
 ];
 

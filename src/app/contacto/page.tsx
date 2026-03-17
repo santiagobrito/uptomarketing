@@ -1,17 +1,48 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { Mail, Clock, CalendarDays } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 
-export const metadata: Metadata = {
-  title: "Contacto",
-  description:
-    "Contacta con Up To Marketing. Cuéntanos tu proyecto y te respondemos en menos de 24 horas.",
-};
+type FormStatus = "idle" | "sending" | "success" | "error";
 
 export default function Contacto() {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [empresa, setEmpresa] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, email, telefono, empresa, mensaje }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Error al enviar");
+      }
+
+      setStatus("success");
+      setNombre("");
+      setEmail("");
+      setTelefono("");
+      setEmpresa("");
+      setMensaje("");
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <>
       <Header />
@@ -42,7 +73,7 @@ export default function Contacto() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
               {/* Formulario */}
               <div className="lg:col-span-3">
-                <form action="#" method="POST" className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label
                       htmlFor="nombre"
@@ -55,6 +86,8 @@ export default function Contacto() {
                       id="nombre"
                       name="nombre"
                       required
+                      value={nombre}
+                      onChange={(e) => setNombre(e.target.value)}
                       className="w-full border border-border rounded-lg px-4 py-3 text-text-primary bg-white placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
                       placeholder="Tu nombre completo"
                     />
@@ -72,6 +105,8 @@ export default function Contacto() {
                       id="email"
                       name="email"
                       required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full border border-border rounded-lg px-4 py-3 text-text-primary bg-white placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
                       placeholder="tu@email.com"
                     />
@@ -91,6 +126,8 @@ export default function Contacto() {
                       type="tel"
                       id="telefono"
                       name="telefono"
+                      value={telefono}
+                      onChange={(e) => setTelefono(e.target.value)}
                       className="w-full border border-border rounded-lg px-4 py-3 text-text-primary bg-white placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
                       placeholder="+34 600 000 000"
                     />
@@ -108,6 +145,8 @@ export default function Contacto() {
                       id="empresa"
                       name="empresa"
                       required
+                      value={empresa}
+                      onChange={(e) => setEmpresa(e.target.value)}
                       className="w-full border border-border rounded-lg px-4 py-3 text-text-primary bg-white placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors"
                       placeholder="Nombre de tu despacho o empresa"
                     />
@@ -125,6 +164,8 @@ export default function Contacto() {
                       name="mensaje"
                       required
                       rows={5}
+                      value={mensaje}
+                      onChange={(e) => setMensaje(e.target.value)}
                       className="w-full border border-border rounded-lg px-4 py-3 text-text-primary bg-white placeholder:text-text-secondary/50 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-colors resize-y"
                       placeholder="Cuéntanos brevemente qué necesitas o qué retos tienes con tu marketing actual."
                     />
@@ -132,10 +173,27 @@ export default function Contacto() {
 
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-copper-500 bg-copper-500 text-white hover:bg-copper-600 px-8 py-3 text-lg cursor-pointer w-full sm:w-auto"
+                    disabled={status === "sending"}
+                    className="inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-copper-500 bg-copper-500 text-white hover:bg-copper-600 px-8 py-3 text-lg cursor-pointer w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Enviar mensaje
+                    {status === "sending" ? "Enviando..." : "Enviar mensaje"}
                   </button>
+
+                  {status === "success" && (
+                    <div className="rounded-lg bg-green-50 border border-green-200 p-4">
+                      <p className="text-green-800 font-medium">
+                        Mensaje enviado correctamente. Te respondemos en menos de 24 horas.
+                      </p>
+                    </div>
+                  )}
+
+                  {status === "error" && (
+                    <div className="rounded-lg bg-red-50 border border-red-200 p-4">
+                      <p className="text-red-800 font-medium">
+                        Ha ocurrido un error al enviar el mensaje. Por favor, inténtalo de nuevo o escríbenos directamente a hola@uptomarketing.com.
+                      </p>
+                    </div>
+                  )}
                 </form>
               </div>
 

@@ -132,7 +132,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Error al agendar la reunion");
+        throw new Error(data.error || "Error al agendar la reunión");
       }
 
       setStep(4);
@@ -151,7 +151,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
       className="fixed inset-0 z-[100] flex items-center justify-center"
       role="dialog"
       aria-modal="true"
-      aria-label="Agendar reunion"
+      aria-label="Agendar reunión"
     >
       {/* Overlay */}
       <div
@@ -324,7 +324,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
           {step === 3 && (
             <div className="space-y-4">
               <p className="text-sm text-text-secondary mb-2">
-                Ayudanos a preparar la reunion para aprovecharla al maximo.
+                Ayúdanos a preparar la reunión para aprovecharla al máximo.
               </p>
 
               <div>
@@ -405,7 +405,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     Agendando...
                   </>
                 ) : (
-                  "Agendar reunion"
+                  "Agendar reunión"
                 )}
               </button>
             </div>
@@ -420,7 +420,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
               <div>
                 <h3 className="text-xl font-bold text-text-primary mb-2">
-                  Tu reunion ha sido agendada
+                  Tu reunión ha sido agendada
                 </h3>
                 <div className="inline-flex items-center gap-2 rounded-lg bg-bg-secondary px-4 py-2.5 font-mono text-sm text-text-primary">
                   <span>{selectedDate ? formatDisplayDate(selectedDate) : ""}</span>
@@ -434,7 +434,7 @@ export function BookingModal({ isOpen, onClose }: BookingModalProps) {
                   Te hemos enviado un email de confirmacion con el enlace de Google Meet.
                 </p>
                 <p>
-                  Revisa tu bandeja de entrada para preparar la reunion.
+                  Revisa tu bandeja de entrada para preparar la reunión.
                 </p>
               </div>
 

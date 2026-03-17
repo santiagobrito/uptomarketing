@@ -52,7 +52,7 @@ export function Header() {
         {/* Desktop CTA */}
         <div className="hidden lg:block">
           <BookingTrigger className="inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-copper-500 text-white hover:bg-copper-600 focus-visible:ring-copper-500 px-4 py-2 text-sm">
-            Agendar reunion
+            Agendar reunión
           </BookingTrigger>
         </div>
 
@@ -104,7 +104,7 @@ export function Header() {
             ))}
             <div className="mt-2">
               <BookingTrigger className="w-full inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 bg-copper-500 text-white hover:bg-copper-600 focus-visible:ring-copper-500 px-6 py-2.5 text-base">
-                Agendar reunion
+                Agendar reunión
               </BookingTrigger>
             </div>
           </div>

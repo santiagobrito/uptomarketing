@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
+import { ArticleJsonLd } from "@/components/seo/json-ld";
 import { blogPosts, getBlogPost, formatDate } from "@/lib/blog-data";
 import { ArrowLeft, ArrowRight, Clock, Calendar, Linkedin } from "lucide-react";
 
@@ -54,6 +55,13 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
+      <ArticleJsonLd
+        title={post.title}
+        description={post.excerpt}
+        url={`https://uptomarketing.com/blog/${post.slug}`}
+        datePublished={post.date}
+        authorName={post.author}
+      />
       <Header />
       <main>
         {/* Article header */}
@@ -236,7 +244,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                         resultados medibles.
                       </p>
                       <a
-                        href="https://linkedin.com"
+                        href="https://www.linkedin.com/in/santiagobrito/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 text-blue-600 text-sm font-medium hover:text-blue-800 transition-colors duration-200"

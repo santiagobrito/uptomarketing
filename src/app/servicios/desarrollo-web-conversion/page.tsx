@@ -380,7 +380,7 @@ export default function DesarrolloWebConversion() {
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
               <Button href="/contacto" variant="outline" size="lg">
-                Agendar reunion
+                Agendar reunión
               </Button>
             </div>
           </div>
