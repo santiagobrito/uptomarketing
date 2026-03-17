@@ -3,17 +3,20 @@ const posts = [
     title: "Guía completa de marketing para despachos profesionales en 2026",
     excerpt:
       "Todo lo que necesitas saber para diseñar una estrategia de captación digital adaptada a tu despacho, paso a paso.",
+    category: "SEO",
   },
   {
     title:
       "Cómo conseguir clientes para tu asesoría sin depender del boca a boca",
     excerpt:
       "El boca a boca funciona, pero no escala. Descubre cómo construir un canal de captación predecible y medible.",
+    category: "Estrategia",
   },
   {
     title: "CRM para despachos: cuál elegir y cómo implementarlo",
     excerpt:
       "Comparativa práctica de los CRM más usados en servicios profesionales, con criterios reales de selección e implementación.",
+    category: "CRM",
   },
 ];
 
@@ -34,13 +37,23 @@ export function BlogPreview() {
               key={post.title}
               className="bg-white border border-border rounded-xl overflow-hidden"
             >
-              <div className="bg-bg-secondary h-48" />
+              <div className="relative bg-gradient-to-br from-blue-800 to-blue-600 h-48">
+                <span className="absolute top-3 left-3 bg-copper-500/90 text-white text-xs px-2 py-1 rounded-full">
+                  {post.category}
+                </span>
+                <p className="text-white text-sm font-medium p-4 pt-12">
+                  {post.title}
+                </p>
+              </div>
               <div className="p-6">
                 <h3 className="font-semibold text-text-primary mb-2">
                   {post.title}
                 </h3>
-                <p className="text-text-secondary text-sm mb-4">
+                <p className="text-text-secondary text-sm mb-2">
                   {post.excerpt}
+                </p>
+                <p className="text-text-secondary text-xs mb-4">
+                  Próximamente
                 </p>
                 <a href="#" className="text-blue-600 font-medium text-sm">
                   Leer artículo &rarr;

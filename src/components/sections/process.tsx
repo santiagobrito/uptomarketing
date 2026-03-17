@@ -1,10 +1,20 @@
-const steps = [
+import { ClipboardCheck, Map, Rocket, RefreshCw } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
+
+const steps: {
+  number: string;
+  title: string;
+  description: string;
+  duration: string;
+  icon: LucideIcon;
+}[] = [
   {
     number: "01",
     title: "Diagnóstico",
     description:
       "Analizamos tu situación actual: web, posicionamiento, canales, CRM, competencia. Te entregamos un informe con hallazgos concretos y oportunidades priorizadas.",
     duration: "Duración: 1 semana",
+    icon: ClipboardCheck,
   },
   {
     number: "02",
@@ -12,6 +22,7 @@ const steps = [
     description:
       "Definimos objetivos de negocio, canales prioritarios, presupuesto recomendado y calendario de implementación. Tú apruebas antes de que se ejecute nada.",
     duration: "Duración: 1-2 semanas",
+    icon: Map,
   },
   {
     number: "03",
@@ -19,6 +30,7 @@ const steps = [
     description:
       "Ponemos en marcha: web, campañas, CRM, automatizaciones, contenido. Todo integrado desde el primer día. Sin fases eternas, con entregables concretos.",
     duration: "Duración: 4-6 semanas",
+    icon: Rocket,
   },
   {
     number: "04",
@@ -26,6 +38,7 @@ const steps = [
     description:
       "Medimos, ajustamos y mejoramos cada mes. Reunión mensual con datos reales: qué funciona, qué no, qué cambiamos. Sin permanencias.",
     duration: "Ciclo mensual",
+    icon: RefreshCw,
   },
 ];
 
@@ -46,6 +59,7 @@ export function Process() {
               <p className="font-mono text-copper-500 text-3xl font-bold mb-2">
                 {step.number}
               </p>
+              <step.icon className="text-blue-600 mb-3" size={24} />
               <h3 className="font-semibold text-text-primary text-lg mb-3">
                 {step.title}
               </h3>

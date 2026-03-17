@@ -1,33 +1,59 @@
-const services = [
+import { Compass, Search, Megaphone, Database, Zap, Monitor } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
+
+const services: {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  metric?: string;
+  href: string;
+}[] = [
   {
     title: "Estrategia de marketing digital",
     description:
       "Auditoría, plan de acción y objetivos medibles. El punto de partida antes de tocar nada.",
+    icon: Compass,
+    href: "/servicios/estrategia-marketing-digital",
   },
   {
     title: "SEO y posicionamiento web",
     description:
       "Que te encuentren las empresas que buscan tu servicio en Google. Con contenido técnico que posiciona y convierte.",
+    icon: Search,
+    metric: "+180% tráfico orgánico medio",
+    href: "/servicios/seo-posicionamiento-web",
   },
   {
     title: "Publicidad digital",
     description:
       "Google Ads, Meta Ads, programática. Campañas orientadas a generar consultas cualificadas, no clics vacíos.",
+    icon: Megaphone,
+    metric: "-45% coste por lead medio",
+    href: "/servicios/publicidad-digital",
   },
   {
     title: "CRM e integraciones",
     description:
       "Configuramos y conectamos tu CRM para que cada lead se registre, se clasifique y se siga de forma automática.",
+    icon: Database,
+    metric: "0 leads perdidos",
+    href: "/servicios/crm-integraciones",
   },
   {
     title: "Automatizaciones de marketing",
     description:
       "Secuencias de email, scoring de leads, alertas al comercial. Que tu sistema trabaje mientras tú asesoras.",
+    icon: Zap,
+    metric: "+12h/semana ahorradas",
+    href: "/servicios/automatizaciones-marketing",
   },
   {
     title: "Desarrollo web orientado a conversión",
     description:
       "Webs que no solo se ven bien: convierten visitas en consultas. Desarrollo propio, sin plantillas genéricas.",
+    icon: Monitor,
+    metric: "3x más conversiones",
+    href: "/servicios/desarrollo-web-conversion",
   },
 ];
 
@@ -48,11 +74,19 @@ export function Services() {
               key={service.title}
               className="bg-white border border-border rounded-xl p-6 hover:shadow-md transition"
             >
+              <div className="bg-blue-50 p-3 rounded-full mb-4 inline-flex">
+                <service.icon className="text-blue-600" size={24} />
+              </div>
               <h3 className="font-semibold text-text-primary mb-3">
                 {service.title}
               </h3>
               <p className="text-text-secondary mb-4">{service.description}</p>
-              <a href="#" className="text-blue-600 font-medium text-sm">
+              {service.metric && (
+                <p className="font-mono text-copper-500 text-sm font-semibold mb-4">
+                  {service.metric}
+                </p>
+              )}
+              <a href={service.href} className="text-blue-600 font-medium text-sm">
                 Saber más &rarr;
               </a>
             </div>

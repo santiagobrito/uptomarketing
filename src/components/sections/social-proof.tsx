@@ -1,3 +1,5 @@
+import { FadeIn } from "@/components/ui/fade-in";
+
 const kpis = [
   {
     value: "-62%",
@@ -34,28 +36,27 @@ export function SocialProof() {
           Resultados que se miden en clientes, no en likes.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center mb-16">
-          {kpis.map((kpi) => (
-            <div key={kpi.value}>
+          {kpis.map((kpi, index) => (
+            <FadeIn key={kpi.value} delay={index * 100}>
               <p className="font-mono text-copper-500 text-5xl font-bold mb-3">
                 {kpi.value}
               </p>
               <p className="text-text-secondary">{kpi.label}</p>
-            </div>
+            </FadeIn>
           ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {testimonials.map((testimonial) => (
-            <div
-              key={testimonial.author}
-              className="bg-white border border-border rounded-xl p-8"
-            >
-              <p className="italic text-text-primary leading-relaxed mb-4">
-                &ldquo;{testimonial.quote}&rdquo;
-              </p>
-              <p className="font-semibold text-sm text-text-secondary">
-                {testimonial.author}
-              </p>
-            </div>
+          {testimonials.map((testimonial, index) => (
+            <FadeIn key={testimonial.author} delay={index * 100}>
+              <div className="bg-white border border-border rounded-xl p-8">
+                <p className="italic text-text-primary leading-relaxed mb-4">
+                  &ldquo;{testimonial.quote}&rdquo;
+                </p>
+                <p className="font-semibold text-sm text-text-secondary">
+                  {testimonial.author}
+                </p>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </div>

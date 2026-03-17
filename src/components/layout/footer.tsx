@@ -1,11 +1,12 @@
 import Link from "next/link";
 
 const serviciosLinks = [
-  { label: "Estrategia Digital", href: "/servicios/estrategia-digital" },
-  { label: "SEO y Contenidos", href: "/servicios/seo-contenidos" },
-  { label: "Publicidad Online", href: "/servicios/publicidad-online" },
-  { label: "Desarrollo Web", href: "/servicios/desarrollo-web" },
-  { label: "Automatizacion", href: "/servicios/automatizacion" },
+  { label: "Estrategia Digital", href: "/servicios/estrategia-marketing-digital" },
+  { label: "SEO y Contenidos", href: "/servicios/seo-posicionamiento-web" },
+  { label: "Publicidad Online", href: "/servicios/publicidad-digital" },
+  { label: "Desarrollo Web", href: "/servicios/desarrollo-web-conversion" },
+  { label: "Automatización", href: "/servicios/automatizaciones-marketing" },
+  { label: "CRM e Integraciones", href: "/servicios/crm-integraciones" },
 ];
 
 const empresaLinks = [
@@ -16,7 +17,7 @@ const empresaLinks = [
 ];
 
 const legalLinks = [
-  { label: "Politica de privacidad", href: "/politica-privacidad" },
+  { label: "Política de privacidad", href: "/politica-privacidad" },
   { label: "Aviso legal", href: "/aviso-legal" },
   { label: "Cookies", href: "/politica-cookies" },
 ];
@@ -44,7 +45,7 @@ export function Footer() {
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-blue-200">
               Consultora de marketing digital especializada en despachos
-              profesionales. Estrategia, tecnologia y resultados medibles para
+              profesionales. Estrategia, tecnología y resultados medibles para
               hacer crecer tu negocio.
             </p>
           </div>
@@ -100,17 +101,6 @@ export function Footer() {
                 >
                   hola@uptomarketing.com
                 </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+34900000000"
-                  className="text-sm text-blue-200 transition-colors duration-200 hover:text-white"
-                >
-                  +34 900 000 000
-                </a>
-              </li>
-              <li className="text-sm text-blue-200">
-                Barcelona, Espana
               </li>
             </ul>
           </div>

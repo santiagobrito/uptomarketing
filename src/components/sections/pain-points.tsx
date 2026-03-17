@@ -1,23 +1,30 @@
-const painPoints = [
+import { Users, Globe, CloudOff, DatabaseZap } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
+
+const painPoints: { title: string; description: string; icon: LucideIcon }[] = [
   {
     title: "Tus clientes llegan por el boca a boca y no controlas cuántos entran cada mes.",
     description:
       "Funciona, hasta que deja de funcionar. Un mes tienes tres encargos, al siguiente ninguno. Sin un sistema, el crecimiento no es predecible.",
+    icon: Users,
   },
   {
     title: "Tu web existe, pero no genera ni una consulta al trimestre.",
     description:
       "La mandaste hacer, la pagaste, está ahí. Pero no convierte. Nadie rellena el formulario. Nadie llama. Es un folleto digital que no trabaja para ti.",
+    icon: Globe,
   },
   {
-    title: "Has probado con algún proveedor de marketing y el resultado fue humo.",
+    title: "Has probado con algún proveedor de marketing y no viste resultados concretos.",
     description:
       "Te hablaron de impresiones, alcance, seguidores. Pero tú querías clientes. Clientes reales que llaman, piden presupuesto y contratan.",
+    icon: CloudOff,
   },
   {
     title: "Tienes un CRM (o algo parecido) que nadie usa.",
     description:
       "Lo contrataste con buena intención. Hoy es un Excel glorificado donde nadie registra nada. Cada lead que entra se gestiona a mano — o se pierde.",
+    icon: DatabaseZap,
   },
 ];
 
@@ -34,6 +41,9 @@ export function PainPoints() {
               key={point.title}
               className="bg-bg-primary border border-border rounded-xl p-6"
             >
+              <div className="bg-blue-50 p-3 rounded-full mb-4 inline-flex">
+                <point.icon className="text-blue-600" size={24} />
+              </div>
               <h3 className="font-semibold text-text-primary mb-3">
                 {point.title}
               </h3>

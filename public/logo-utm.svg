@@ -1,0 +1,13 @@
+<svg width="100%" viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
+  
+
+  <text x="20" y="135" fill="var(--color-text-primary)" style="fill:rgb(250, 249, 245);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:Impact, &quot;Arial Black&quot;, sans-serif;font-size:110px;font-weight:400;text-anchor:start;dominant-baseline:auto">UP</text>
+  <polygon points="164,22 150,54 178,54" fill="#185FA5" style="fill:rgb(24, 95, 165);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <line x1="196" y1="26" x2="196" y2="170" stroke="var(--color-border-secondary)" stroke-width="0.8" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.3);color:rgb(255, 255, 255);stroke-width:0.8px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  <text x="212" y="78" fill="var(--color-text-secondary)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:13px;font-weight:300;font-style:italic;text-anchor:start;dominant-baseline:auto">to</text>
+  <text x="210" y="123" fill="var(--color-text-primary)" style="fill:rgb(250, 249, 245);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:22px;font-weight:700;text-anchor:start;dominant-baseline:auto">MARKETING</text>
+
+  <line x1="210" y1="134" x2="390" y2="134" stroke="var(--color-border-tertiary)" stroke-width="0.6" style="fill:rgb(0, 0, 0);stroke:rgba(222, 220, 209, 0.15);color:rgb(255, 255, 255);stroke-width:0.6px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <text x="210" y="152" fill="var(--color-text-secondary)" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size:11px;font-weight:300;text-anchor:start;dominant-baseline:auto">DESPACHOS &amp; B2B</text>
+</svg>

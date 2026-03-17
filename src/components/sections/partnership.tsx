@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Partnership() {
   return (
     <section className="bg-white py-20">
@@ -20,12 +22,17 @@ export function Partnership() {
               construimos sobre un conocimiento profundo del sector.
             </p>
           </div>
-          <div className="flex items-center justify-center">
-            <div className="bg-bg-secondary rounded-xl w-full max-w-sm h-64 flex items-center justify-center">
-              <span className="text-text-secondary text-lg font-medium">
-                Logo Izquierdomotter
-              </span>
-            </div>
+          <div className="flex flex-col items-center justify-center">
+            <Image
+              src="/logo-izquierdomotter.png"
+              alt="Izquierdo Motter - Despachos Profesionales"
+              width={400}
+              height={120}
+              className="w-full max-w-sm"
+            />
+            <p className="text-text-secondary text-sm text-center mt-4">
+              Consultores de despachos profesionales
+            </p>
           </div>
         </div>
       </div>

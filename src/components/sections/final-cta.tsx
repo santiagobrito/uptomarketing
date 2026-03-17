@@ -1,6 +1,9 @@
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
 export function FinalCta() {
   return (
-    <section id="diagnostico" className="bg-blue-600 text-white py-20">
+    <section id="diagnostico" className="bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500 text-white py-20">
       <div className="max-w-3xl mx-auto px-6 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold mb-6">
           ¿Quieres saber qué está fallando en tu marketing antes de invertir un
@@ -11,13 +14,11 @@ export function FinalCta() {
           recibirás un informe personalizado con los puntos críticos de tu
           presencia digital y las tres primeras acciones que deberías tomar.
         </p>
-        <a
-          href="#"
-          className="inline-block bg-copper-500 hover:bg-copper-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition mb-6"
-        >
+        <Button href="/diagnostico" variant="primary" size="lg">
           Solicitar diagnóstico gratuito
-        </a>
-        <p className="text-white/70 text-sm">
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Button>
+        <p className="text-white/70 text-sm mt-6">
           15 preguntas — Resultado inmediato — Sin compromiso
         </p>
       </div>
