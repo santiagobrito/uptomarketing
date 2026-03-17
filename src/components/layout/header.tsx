@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -31,15 +32,15 @@ export function Header() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-0.5">
-          <span className="text-xl font-bold tracking-tight text-white">
-            UP
-          </span>
-          <span className="mx-1.5 text-xl font-light text-copper-500">|</span>
-          <span className="text-xl font-light tracking-wide text-white">
-            to{" "}
-            <span className="font-bold">MARKETING</span>
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-utm.svg"
+            alt="Up To Marketing"
+            width={160}
+            height={48}
+            className="h-10 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

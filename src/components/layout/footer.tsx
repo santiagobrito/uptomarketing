@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const serviciosLinks = [
   { label: "Estrategia Digital", href: "/servicios/estrategia-marketing-digital" },
@@ -32,16 +33,14 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
           {/* Col 1: Logo + description */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-0.5">
-              <span className="text-xl font-bold tracking-tight text-white">
-                UP
-              </span>
-              <span className="mx-1.5 text-xl font-light text-copper-500">
-                |
-              </span>
-              <span className="text-xl font-light tracking-wide text-white">
-                to <span className="font-bold">MARKETING</span>
-              </span>
+            <Link href="/" className="inline-flex items-center">
+              <Image
+                src="/logo-utm.svg"
+                alt="Up To Marketing"
+                width={160}
+                height={48}
+                className="h-10 w-auto"
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-blue-200">
               Consultora de marketing digital especializada en despachos
