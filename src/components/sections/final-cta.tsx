@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
+import { ArrowRight, Calendar } from "lucide-react";
 
 export function FinalCta() {
   return (
@@ -14,12 +15,18 @@ export function FinalCta() {
           recibirás un informe personalizado con los puntos críticos de tu
           presencia digital y las tres primeras acciones que deberías tomar.
         </p>
-        <Button href="/diagnostico" variant="primary" size="lg">
-          Solicitar diagnóstico gratuito
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button href="/diagnostico" variant="primary" size="lg">
+            Solicitar diagnóstico gratuito
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          <BookingTrigger className="border border-white text-white hover:bg-white/10 px-8 py-4 rounded-lg text-lg font-semibold transition inline-flex items-center justify-center gap-2">
+            <Calendar className="h-5 w-5" />
+            Agendar reunión
+          </BookingTrigger>
+        </div>
         <p className="text-white/70 text-sm mt-6">
-          15 preguntas — Resultado inmediato — Sin compromiso
+          Sin compromiso — Resultado inmediato
         </p>
       </div>
     </section>

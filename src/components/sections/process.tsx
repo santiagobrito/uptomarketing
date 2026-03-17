@@ -1,5 +1,6 @@
 import { ClipboardCheck, Map, Rocket, RefreshCw } from "lucide-react";
 import { type LucideIcon } from "lucide-react";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 const steps: {
   number: string;
@@ -69,6 +70,11 @@ export function Process() {
               </p>
             </div>
           ))}
+        </div>
+        <div className="text-center mt-12">
+          <BookingTrigger className="inline-flex items-center justify-center gap-2 bg-copper-500 hover:bg-copper-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition">
+            Empieza con el diagnóstico gratuito
+          </BookingTrigger>
         </div>
       </div>
     </section>

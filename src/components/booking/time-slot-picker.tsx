@@ -20,8 +20,8 @@ function getAvailableBusinessDays(): Date[] {
   const current = new Date();
   current.setHours(0, 0, 0, 0);
 
-  // Start from 3 days ahead (minimum advance)
-  current.setDate(current.getDate() + 3);
+  // Start from 2 days ahead (minimum advance)
+  current.setDate(current.getDate() + 2);
 
   const maxDate = new Date();
   maxDate.setDate(maxDate.getDate() + 15);
@@ -67,6 +67,8 @@ export function TimeSlotPicker({
     error: null,
   });
 
+  const [triedAutoAdvance, setTriedAutoAdvance] = useState(false);
+
   // Auto-select first day if nothing selected
   useEffect(() => {
     if (!selectedDate && businessDays.length > 0) {
@@ -89,12 +91,24 @@ export function TimeSlotPicker({
         return res.json();
       })
       .then((data) => {
-        // API returns { slots: [{ time: "09:00", available: true }, ...] } or { slots: ["09:00", ...] }
         const rawSlots = data.slots || [];
         const normalizedSlots = rawSlots.map((s: string | { time: string }) =>
           typeof s === "string" ? s : s.time
         );
         setSlotData({ slots: normalizedSlots, loading: false, error: null });
+
+        // If no slots on first auto-selected day, try next available day
+        if (normalizedSlots.length === 0 && !triedAutoAdvance) {
+          const currentIdx = businessDays.findIndex(
+            (d) => formatDateISO(d) === selectedDate
+          );
+          if (currentIdx >= 0 && currentIdx < businessDays.length - 1) {
+            setTriedAutoAdvance(true);
+            onSelectDate(formatDateISO(businessDays[currentIdx + 1]));
+          }
+        } else if (normalizedSlots.length > 0) {
+          setTriedAutoAdvance(false);
+        }
       })
       .catch((err) => {
         if (err.name === "AbortError") return;
@@ -102,7 +116,7 @@ export function TimeSlotPicker({
       });
 
     return () => controller.abort();
-  }, [selectedDate]);
+  }, [selectedDate]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-6">

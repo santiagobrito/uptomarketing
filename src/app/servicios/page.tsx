@@ -50,11 +50,11 @@ const services: {
   {
     title: "Publicidad digital",
     description:
-      "Google Ads, Meta Ads, programática. Campañas orientadas a generar consultas cualificadas, no clics vacíos.",
+      "Google Ads, Meta Ads, LinkedIn Ads. Campañas orientadas a generar consultas cualificadas, no clics vacíos.",
     icon: Megaphone,
     metric: "-45% coste por lead medio",
     href: "/servicios/publicidad-digital",
-    tags: ["Google Ads", "Meta Ads", "Programática", "Remarketing"],
+    tags: ["Google Ads", "Meta Ads", "LinkedIn Ads", "Remarketing"],
   },
   {
     title: "CRM e integraciones",

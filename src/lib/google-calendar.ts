@@ -13,7 +13,7 @@ const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
 // === CONFIGURACIÓN DE DISPONIBILIDAD ===
 const SLOT_DURATION_MINUTES = 45;
-const MIN_ADVANCE_DAYS = 3;
+const MIN_ADVANCE_DAYS = 2;
 const MAX_ADVANCE_DAYS = 15;
 const MAX_BOOKINGS_PER_DAY = 2;
 
@@ -180,6 +180,7 @@ export async function createBooking(params: {
 
   const event = await calendar.events.insert({
     calendarId,
+    sendUpdates: "all",
     requestBody: {
       summary: `Consulta: ${params.name} — ${params.company}`,
       description: `Reunión con ${params.name} (${params.email})\nEmpresa: ${params.company}\nTema: ${params.topic}`,

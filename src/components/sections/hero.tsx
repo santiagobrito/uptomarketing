@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { BookingTrigger } from "@/components/booking/booking-trigger";
 
 export function Hero() {
   return (
@@ -30,9 +31,9 @@ export function Hero() {
           <Button href="#diagnostico" variant="primary" size="lg">
             Solicitar diagnóstico gratuito
           </Button>
-          <Button href="#proceso" variant="outline" size="lg">
-            Ver cómo trabajamos
-          </Button>
+          <BookingTrigger className="border border-white text-white hover:bg-white/10 px-8 py-4 rounded-lg text-lg font-semibold transition inline-flex items-center justify-center">
+            Agendar reunión gratuita
+          </BookingTrigger>
         </div>
         <p className="text-white/60 text-sm mb-10">
           Sin compromiso. En 48h tienes tu diagnóstico con recomendaciones accionables.

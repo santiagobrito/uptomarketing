@@ -27,9 +27,9 @@ import {
 
 export const metadata: Metadata = {
   title:
-    "Publicidad Digital para Asesorías y Empresas B2B | Google Ads, Meta Ads y Programática",
+    "Publicidad Digital para Asesorías y Empresas B2B | Google Ads, Meta Ads y LinkedIn Ads",
   description:
-    "Campañas de Google Ads, Meta Ads y publicidad programática para asesorías y empresas de servicios B2B. Captación de leads cualificados con control total del presupuesto. Hablemos.",
+    "Campañas de Google Ads, Meta Ads y publicidad LinkedIn Ads para asesorías y empresas de servicios B2B. Captación de leads cualificados con control total del presupuesto. Hablemos.",
 };
 
 const painPoints = [
@@ -65,7 +65,7 @@ const painPoints = [
   },
   {
     icon: Radio,
-    title: "Desconocimiento de la programática",
+    title: "Desconocimiento de la LinkedIn Ads",
     description:
       "Existe un mundo más allá de Google y Meta que te permite llegar a tu público en miles de sitios web con precisión quirúrgica.",
   },
@@ -90,7 +90,7 @@ const channels = [
     ],
   },
   {
-    title: "Publicidad Programática",
+    title: "Publicidad LinkedIn Ads",
     items: [
       "Compra de medios automatizada en miles de sitios web",
       "Segmentación por datos de intención, comportamiento y contexto",
@@ -205,7 +205,7 @@ const benefits = [
   },
   {
     icon: Layers,
-    title: "Acceso a publicidad programática",
+    title: "Acceso a publicidad LinkedIn Ads",
     description:
       "Un canal que la mayoría de proveedores no ofrece y que puede marcar la diferencia en B2B por su capacidad de segmentación y su coste competitivo.",
   },
@@ -226,7 +226,7 @@ export default function PublicidadDigitalPage() {
               Publicidad digital que trae clientes, no solo clics.
             </h1>
             <p className="text-blue-100 text-lg lg:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
-              Google Ads, Meta Ads y publicidad programática para asesorías,
+              Google Ads, Meta Ads y publicidad LinkedIn Ads para asesorías,
               despachos profesionales y empresas B2B. Campañas optimizadas para
               generar leads cualificados, no impresiones vacías.
             </p>
@@ -417,7 +417,7 @@ export default function PublicidadDigitalPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-text-primary mb-2">
-                  Dominamos la publicidad programática
+                  Dominamos la publicidad LinkedIn Ads
                 </h3>
                 <p className="text-text-secondary leading-relaxed">
                   Es un canal que la mayoría de proveedores de marketing para
