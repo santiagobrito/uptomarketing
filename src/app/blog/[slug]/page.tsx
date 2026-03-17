@@ -103,15 +103,118 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-12">
               {/* Main content */}
               <article className="max-w-3xl">
-                <div className="bg-white border border-border rounded-xl p-8 lg:p-12">
-                  {paragraphs.map((paragraph, index) => (
-                    <p
-                      key={index}
-                      className="text-text-primary text-lg leading-relaxed mb-6 last:mb-0"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
+                <div className="bg-white border border-border rounded-xl p-8 lg:p-12 prose-custom">
+                  {paragraphs.map((paragraph, index) => {
+                    // H2 headings
+                    if (paragraph.startsWith("## ")) {
+                      return (
+                        <h2
+                          key={index}
+                          className="text-2xl font-bold text-text-primary mt-10 mb-4 first:mt-0"
+                        >
+                          {paragraph.replace("## ", "")}
+                        </h2>
+                      );
+                    }
+                    // H3 headings
+                    if (paragraph.startsWith("### ")) {
+                      return (
+                        <h3
+                          key={index}
+                          className="text-xl font-semibold text-text-primary mt-8 mb-3"
+                        >
+                          {paragraph.replace("### ", "")}
+                        </h3>
+                      );
+                    }
+                    // Unordered list blocks
+                    if (paragraph.includes("\n- ") || paragraph.startsWith("- ")) {
+                      const items = paragraph.split("\n").filter((line) => line.startsWith("- "));
+                      return (
+                        <ul key={index} className="list-disc pl-6 mb-6 space-y-2">
+                          {items.map((item, i) => (
+                            <li
+                              key={i}
+                              className="text-text-primary text-lg leading-relaxed"
+                            >
+                              {item.replace(/^- /, "")}
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    // Ordered list blocks
+                    if (/^\d+\. /.test(paragraph)) {
+                      const items = paragraph.split("\n").filter((line) => /^\d+\. /.test(line));
+                      return (
+                        <ol key={index} className="list-decimal pl-6 mb-6 space-y-2">
+                          {items.map((item, i) => (
+                            <li
+                              key={i}
+                              className="text-text-primary text-lg leading-relaxed"
+                            >
+                              {item.replace(/^\d+\. /, "")}
+                            </li>
+                          ))}
+                        </ol>
+                      );
+                    }
+                    // Markdown tables
+                    if (paragraph.includes("|") && paragraph.includes("\n|")) {
+                      const lines = paragraph.split("\n").filter((line) => line.trim().startsWith("|"));
+                      if (lines.length >= 2) {
+                        const headerCells = lines[0].split("|").filter((c) => c.trim() !== "").map((c) => c.trim());
+                        const bodyLines = lines[1]?.match(/^\|[\s-|]+\|$/) ? lines.slice(2) : lines.slice(1);
+                        return (
+                          <div key={index} className="overflow-x-auto mb-6">
+                            <table className="w-full border-collapse text-base">
+                              <thead>
+                                <tr className="bg-blue-50 border-b-2 border-blue-200">
+                                  {headerCells.map((cell, i) => (
+                                    <th key={i} className="text-left px-4 py-3 font-semibold text-text-primary">
+                                      {cell}
+                                    </th>
+                                  ))}
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {bodyLines.map((line, rowIdx) => {
+                                  const cells = line.split("|").filter((c) => c.trim() !== "").map((c) => c.trim());
+                                  return (
+                                    <tr key={rowIdx} className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                                      {cells.map((cell, cellIdx) => (
+                                        <td key={cellIdx} className="px-4 py-3 text-text-primary border-b border-border">
+                                          {cell}
+                                        </td>
+                                      ))}
+                                    </tr>
+                                  );
+                                })}
+                              </tbody>
+                            </table>
+                          </div>
+                        );
+                      }
+                    }
+                    // Regular paragraphs (support **bold**)
+                    const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
+                    return (
+                      <p
+                        key={index}
+                        className="text-text-primary text-lg leading-relaxed mb-6 last:mb-0"
+                      >
+                        {parts.map((part, i) =>
+                          part.startsWith("**") && part.endsWith("**") ? (
+                            <strong key={i} className="font-semibold">
+                              {part.slice(2, -2)}
+                            </strong>
+                          ) : (
+                            part
+                          )
+                        )}
+                      </p>
+                    );
+                  })}
                 </div>
 
                 {/* Author bio */}
