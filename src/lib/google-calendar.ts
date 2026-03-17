@@ -11,7 +11,6 @@ oauth2Client.setCredentials({
 
 const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
-// Genera slots de 30 min entre start y end
 function generateTimeSlots(start: Date, end: Date, durationMinutes: number) {
   const slots: { start: Date; end: Date }[] = [];
   let current = new Date(start);
@@ -25,8 +24,10 @@ function generateTimeSlots(start: Date, end: Date, durationMinutes: number) {
   return slots;
 }
 
-// Verifica si un slot se superpone con slots ocupados
-function isOverlapping(slot: { start: Date; end: Date }, busySlots: { start?: string | null; end?: string | null }[]) {
+function isOverlapping(
+  slot: { start: Date; end: Date },
+  busySlots: { start?: string | null; end?: string | null }[]
+) {
   return busySlots.some((busy) => {
     if (!busy.start || !busy.end) return false;
     const busyStart = new Date(busy.start);
@@ -36,42 +37,48 @@ function isOverlapping(slot: { start: Date; end: Date }, busySlots: { start?: st
 }
 
 export async function getAvailableSlots(date: string) {
-  const startOfDay = new Date(`${date}T09:00:00+02:00`); // Hora España
+  const startOfDay = new Date(`${date}T09:00:00+02:00`);
   const endOfDay = new Date(`${date}T18:00:00+02:00`);
+  const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
 
-  console.log("[Calendar] GOOGLE_CLIENT_ID set:", !!process.env.GOOGLE_CLIENT_ID);
-  console.log("[Calendar] GOOGLE_REFRESH_TOKEN set:", !!process.env.GOOGLE_REFRESH_TOKEN);
+  console.log("[Calendar] CLIENT_ID:", process.env.GOOGLE_CLIENT_ID ? "SET" : "MISSING");
+  console.log("[Calendar] REFRESH_TOKEN:", process.env.GOOGLE_REFRESH_TOKEN ? "SET" : "MISSING");
 
-  // Si las credenciales no están configuradas, devolver slots mock
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_REFRESH_TOKEN) {
-    console.log("[Calendar] Using MOCK slots (no credentials)");
-    const mockSlots = generateTimeSlots(startOfDay, endOfDay, 30);
-    // Simular algunos slots ocupados (aleatoriamente quitar algunos)
-    return mockSlots
-      .filter((_, i) => i % 3 !== 1) // quitar 1 de cada 3
+    console.log("[Calendar] Credentials missing - returning all slots");
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+    return allSlots.map((slot) => ({
+      time: slot.start.toTimeString().slice(0, 5),
+      available: true,
+    }));
+  }
+
+  try {
+    const response = await calendar.freebusy.query({
+      requestBody: {
+        timeMin: startOfDay.toISOString(),
+        timeMax: endOfDay.toISOString(),
+        items: [{ id: calendarId }],
+      },
+    });
+
+    const busySlots = response.data.calendars?.[calendarId]?.busy || [];
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+
+    return allSlots
+      .filter((slot) => !isOverlapping(slot, busySlots))
       .map((slot) => ({
         time: slot.start.toTimeString().slice(0, 5),
         available: true,
       }));
-  }
-
-  const response = await calendar.freebusy.query({
-    requestBody: {
-      timeMin: startOfDay.toISOString(),
-      timeMax: endOfDay.toISOString(),
-      items: [{ id: process.env.GOOGLE_CALENDAR_ID || "primary" }],
-    },
-  });
-
-  const busySlots = response.data.calendars?.[process.env.GOOGLE_CALENDAR_ID || "primary"]?.busy || [];
-  const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
-
-  return allSlots
-    .filter((slot) => !isOverlapping(slot, busySlots))
-    .map((slot) => ({
+  } catch (error) {
+    console.error("[Calendar] Freebusy error:", error);
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+    return allSlots.map((slot) => ({
       time: slot.start.toTimeString().slice(0, 5),
       available: true,
     }));
+  }
 }
 
 export async function createBooking(params: {
@@ -82,22 +89,23 @@ export async function createBooking(params: {
   company: string;
   topic: string;
 }) {
-  // Si no hay credenciales, devolver datos mock
+  const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
+
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_REFRESH_TOKEN) {
-    console.log("[Calendar] Using MOCK booking (no credentials)");
+    console.log("[Calendar] Credentials missing - mock booking");
     return {
       eventId: `mock-${Date.now()}`,
-      meetLink: "https://meet.google.com/mock-meeting",
+      meetLink: "https://meet.google.com/mock-link",
     };
   }
 
-  console.log("[Calendar] Creating REAL booking for", params.name, params.date, params.time);
+  console.log("[Calendar] Creating REAL event for", params.name);
 
   const start = new Date(`${params.date}T${params.time}:00+02:00`);
   const end = new Date(start.getTime() + 30 * 60 * 1000);
 
   const event = await calendar.events.insert({
-    calendarId: process.env.GOOGLE_CALENDAR_ID || "primary",
+    calendarId,
     requestBody: {
       summary: `Consulta: ${params.name} — ${params.company}`,
       description: `Reunión con ${params.name} (${params.email})\nEmpresa: ${params.company}\nTema: ${params.topic}`,
@@ -113,6 +121,8 @@ export async function createBooking(params: {
     },
     conferenceDataVersion: 1,
   });
+
+  console.log("[Calendar] Created:", event.data.id, "Meet:", event.data.hangoutLink);
 
   return {
     eventId: event.data.id,
