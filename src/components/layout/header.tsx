@@ -32,15 +32,14 @@ export function Header() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/logo-utm.svg"
-            alt="Up To Marketing"
-            width={160}
-            height={48}
-            className="h-10 w-auto"
-            priority
-          />
+        <Link href="/" className="flex items-baseline gap-1">
+          <span className="text-2xl font-black tracking-tight text-white" style={{ fontFamily: "Impact, 'Arial Black', sans-serif" }}>
+            UP
+          </span>
+          <span className="text-blue-400 text-sm font-light italic mx-0.5">to</span>
+          <span className="text-lg font-bold tracking-wide text-white">
+            MARKETING
+          </span>
         </Link>
 
         {/* Desktop nav */}
