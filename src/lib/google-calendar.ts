@@ -11,6 +11,32 @@ oauth2Client.setCredentials({
 
 const calendar = google.calendar({ version: "v3", auth: oauth2Client });
 
+// === CONFIGURACIÓN DE DISPONIBILIDAD ===
+const SLOT_DURATION_MINUTES = 45;
+const MIN_ADVANCE_DAYS = 3;
+const MAX_ADVANCE_DAYS = 15;
+const MAX_BOOKINGS_PER_DAY = 2;
+
+// Horarios por día de la semana (0=dom, 1=lun, 2=mar, 3=mie, 4=jue, 5=vie, 6=sab)
+const SCHEDULE: Record<number, { start: number; end: number } | null> = {
+  0: null,                    // Domingo: cerrado
+  1: { start: 14, end: 19 }, // Lunes: 14:00-19:00
+  2: { start: 12, end: 18 }, // Martes: 12:00-18:00
+  3: { start: 12, end: 19 }, // Miércoles: 12:00-19:00
+  4: { start: 12, end: 19 }, // Jueves: 12:00-19:00
+  5: { start: 11, end: 15 }, // Viernes: 11:00-15:00
+  6: null,                    // Sábado: cerrado
+};
+
+function formatTimeSpain(date: Date): string {
+  return date.toLocaleTimeString("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Europe/Madrid",
+  });
+}
+
 function generateTimeSlots(start: Date, end: Date, durationMinutes: number) {
   const slots: { start: Date; end: Date }[] = [];
   let current = new Date(start);
@@ -36,24 +62,66 @@ function isOverlapping(
   });
 }
 
+// Cuenta cuántas reuniones "Consulta:" hay en un día
+async function getBookingCountForDate(date: string, calendarId: string): Promise<number> {
+  try {
+    const startOfDay = new Date(`${date}T00:00:00+02:00`);
+    const endOfDay = new Date(`${date}T23:59:59+02:00`);
+
+    const response = await calendar.events.list({
+      calendarId,
+      timeMin: startOfDay.toISOString(),
+      timeMax: endOfDay.toISOString(),
+      singleEvents: true,
+    });
+
+    const bookings = (response.data.items || []).filter(
+      (event) => event.summary?.startsWith("Consulta:")
+    );
+    return bookings.length;
+  } catch {
+    return 0;
+  }
+}
+
 export async function getAvailableSlots(date: string) {
-  const startOfDay = new Date(`${date}T09:00:00+02:00`);
-  const endOfDay = new Date(`${date}T18:00:00+02:00`);
   const calendarId = process.env.GOOGLE_CALENDAR_ID || "primary";
 
-  console.log("[Calendar] CLIENT_ID:", process.env.GOOGLE_CLIENT_ID ? "SET" : "MISSING");
-  console.log("[Calendar] REFRESH_TOKEN:", process.env.GOOGLE_REFRESH_TOKEN ? "SET" : "MISSING");
+  // Verificar día de la semana
+  const dateObj = new Date(`${date}T12:00:00+02:00`);
+  const dayOfWeek = dateObj.getDay();
+  const schedule = SCHEDULE[dayOfWeek];
+
+  // Día cerrado
+  if (!schedule) {
+    return [];
+  }
+
+  // Verificar rango de antelación
+  const now = new Date();
+  const diffDays = Math.floor((dateObj.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+  if (diffDays < MIN_ADVANCE_DAYS || diffDays > MAX_ADVANCE_DAYS) {
+    return [];
+  }
+
+  const startOfDay = new Date(`${date}T${String(schedule.start).padStart(2, "0")}:00:00+02:00`);
+  const endOfDay = new Date(`${date}T${String(schedule.end).padStart(2, "0")}:00:00+02:00`);
 
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_REFRESH_TOKEN) {
-    console.log("[Calendar] Credentials missing - returning all slots");
-    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, SLOT_DURATION_MINUTES);
     return allSlots.map((slot) => ({
-      time: slot.start.toTimeString().slice(0, 5),
+      time: formatTimeSpain(slot.start),
       available: true,
     }));
   }
 
   try {
+    // Verificar máximo de reuniones por día
+    const bookingCount = await getBookingCountForDate(date, calendarId);
+    if (bookingCount >= MAX_BOOKINGS_PER_DAY) {
+      return [];
+    }
+
     const response = await calendar.freebusy.query({
       requestBody: {
         timeMin: startOfDay.toISOString(),
@@ -63,19 +131,19 @@ export async function getAvailableSlots(date: string) {
     });
 
     const busySlots = response.data.calendars?.[calendarId]?.busy || [];
-    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, SLOT_DURATION_MINUTES);
 
     return allSlots
       .filter((slot) => !isOverlapping(slot, busySlots))
       .map((slot) => ({
-        time: slot.start.toTimeString().slice(0, 5),
+        time: formatTimeSpain(slot.start),
         available: true,
       }));
   } catch (error) {
     console.error("[Calendar] Freebusy error:", error);
-    const allSlots = generateTimeSlots(startOfDay, endOfDay, 30);
+    const allSlots = generateTimeSlots(startOfDay, endOfDay, SLOT_DURATION_MINUTES);
     return allSlots.map((slot) => ({
-      time: slot.start.toTimeString().slice(0, 5),
+      time: formatTimeSpain(slot.start),
       available: true,
     }));
   }
@@ -99,10 +167,16 @@ export async function createBooking(params: {
     };
   }
 
-  console.log("[Calendar] Creating REAL event for", params.name);
+  // Verificar máximo de reuniones
+  const bookingCount = await getBookingCountForDate(params.date, calendarId);
+  if (bookingCount >= MAX_BOOKINGS_PER_DAY) {
+    throw new Error("Se ha alcanzado el máximo de reuniones para este día. Por favor, selecciona otro día.");
+  }
+
+  console.log("[Calendar] Creating event for", params.name);
 
   const start = new Date(`${params.date}T${params.time}:00+02:00`);
-  const end = new Date(start.getTime() + 30 * 60 * 1000);
+  const end = new Date(start.getTime() + SLOT_DURATION_MINUTES * 60 * 1000);
 
   const event = await calendar.events.insert({
     calendarId,

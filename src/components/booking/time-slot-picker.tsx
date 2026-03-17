@@ -15,17 +15,21 @@ interface SlotData {
   error: string | null;
 }
 
-function getNextBusinessDays(count: number): Date[] {
+function getAvailableBusinessDays(): Date[] {
   const days: Date[] = [];
   const current = new Date();
   current.setHours(0, 0, 0, 0);
 
-  // Start from tomorrow
-  current.setDate(current.getDate() + 1);
+  // Start from 3 days ahead (minimum advance)
+  current.setDate(current.getDate() + 3);
 
-  while (days.length < count) {
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 15);
+
+  while (current <= maxDate) {
     const dayOfWeek = current.getDay();
-    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+    // Lunes a viernes (1-5)
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
       days.push(new Date(current));
     }
     current.setDate(current.getDate() + 1);
@@ -56,7 +60,7 @@ export function TimeSlotPicker({
   onSelectDate,
   onSelectTime,
 }: TimeSlotPickerProps) {
-  const businessDays = getNextBusinessDays(5);
+  const businessDays = getAvailableBusinessDays();
   const [slotData, setSlotData] = useState<SlotData>({
     slots: [],
     loading: false,
