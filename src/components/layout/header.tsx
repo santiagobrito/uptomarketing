@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Sobre nosotros", href: "/sobre-nosotros" },
   { label: "Partners", href: "/partners" },
   { label: "Blog", href: "/blog" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 export function Header() {
