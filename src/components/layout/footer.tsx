@@ -34,7 +34,7 @@ export function Footer() {
           {/* Col 1: Logo + description */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/">
-              <Logo height={44} />
+              <Logo height={52} />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-blue-200">
               Consultora de marketing digital especializada en despachos

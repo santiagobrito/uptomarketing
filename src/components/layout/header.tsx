@@ -33,7 +33,7 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/">
-          <Logo height={44} />
+          <Logo height={48} />
         </Link>
 
         {/* Desktop nav */}
