@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -69,11 +70,13 @@ export default function BlogPage() {
 
                     <div className="flex items-center justify-between pt-4 border-t border-border">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
-                          <span className="text-white text-xs font-semibold">
-                            SB
-                          </span>
-                        </div>
+                        <Image
+                          src="/santiago-brito.png"
+                          alt="Santiago Brito"
+                          width={28}
+                          height={28}
+                          className="w-7 h-7 rounded-full object-cover"
+                        />
                         <div>
                           <p className="text-text-primary text-xs font-medium">
                             {post.author}

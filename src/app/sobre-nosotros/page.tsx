@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Shield, Code, Target, Users } from "lucide-react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -134,11 +135,15 @@ export default function SobreNosotros() {
               Up To Marketing nace de la experiencia directa trabajando con despachos profesionales durante más de 15 años.
             </p>
             <div className="flex flex-col md:flex-row items-center gap-10 bg-white border border-border rounded-2xl p-8">
-              {/* Foto placeholder */}
               <div className="flex-shrink-0">
-                <div className="h-48 w-48 rounded-2xl bg-gradient-to-br from-blue-800 to-blue-600 flex items-center justify-center">
-                  <span className="text-5xl font-bold text-white">SB</span>
-                </div>
+                <Image
+                  src="/santiago-brito.png"
+                  alt="Santiago Brito — Fundador de Up To Marketing"
+                  width={192}
+                  height={192}
+                  className="h-48 w-48 rounded-2xl object-cover"
+                  priority
+                />
               </div>
               {/* Bio */}
               <div>

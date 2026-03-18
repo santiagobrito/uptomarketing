@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/layout/header";
@@ -86,9 +87,13 @@ export default async function BlogPostPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-6 text-blue-200 text-sm">
               {/* Author */}
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 border-2 border-white/20 flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold">SB</span>
-                </div>
+                <Image
+                  src="/santiago-brito.png"
+                  alt="Santiago Brito"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white/20"
+                />
                 <span className="font-medium text-white">{post.author}</span>
               </div>
 
@@ -228,11 +233,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* Author bio */}
                 <div className="bg-white border border-border rounded-xl p-8 mt-8">
                   <div className="flex flex-col sm:flex-row items-start gap-5">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex-shrink-0 flex items-center justify-center">
-                      <span className="text-white text-xl font-semibold">
-                        SB
-                      </span>
-                    </div>
+                    <Image
+                      src="/santiago-brito.png"
+                      alt="Santiago Brito"
+                      width={64}
+                      height={64}
+                      className="w-16 h-16 rounded-full object-cover flex-shrink-0"
+                    />
                     <div>
                       <h3 className="font-semibold text-text-primary text-lg mb-1">
                         Santiago Brito
